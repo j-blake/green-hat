@@ -18,6 +18,24 @@ defmodule TimeValueTest do
            ) == {:ok, 1257.79}
   end
 
+  test "calculates FV(A, i, n) paid at period end" do
+    assert TimeValue.future_value(
+             with_annuity: 1000,
+             with_interest_rate: 0.05,
+             with_periods: 5,
+             with_payment_at: :end
+           ) == {:ok, 5_525.63}
+  end
+
+  test "calculates FV(A, i, n) paid at period beginning" do
+    assert TimeValue.future_value(
+             with_annuity: 1000,
+             with_interest_rate: 0.05,
+             with_periods: 5,
+             with_payment_at: :beginning
+           ) == {:ok, 5_801.91}
+  end
+
   test "returns error for empty FV params list" do
     assert TimeValue.future_value([]) == {:error, "incorrect params"}
   end
@@ -44,6 +62,14 @@ defmodule TimeValueTest do
              with_interest_rate: 0.025,
              with_periods: 10
            ) == {:ok, 875.21}
+  end
+
+  test "calculates PV(A, i, n) paid at period end" do
+    assert TimeValue.present_value(
+             with_annuity: 1000,
+             with_interest_rate: 0.05,
+             with_periods: 5
+           ) == {:ok, 4_329.48}
   end
 
   test "returns error for empty PV params list" do
