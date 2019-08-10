@@ -14,7 +14,8 @@ defmodule TimeValueTest do
     assert TimeValue.future_value(
              with_annuity: 100,
              with_interest_rate: 0.05,
-             with_periods: 10
+             with_periods: 10,
+             with_payment_at_end?: true
            ) == {:ok, 1257.79}
   end
 
@@ -23,7 +24,7 @@ defmodule TimeValueTest do
              with_annuity: 1000,
              with_interest_rate: 0.05,
              with_periods: 5,
-             with_payment_at: :end
+             with_payment_at_end?: true
            ) == {:ok, 5_525.63}
   end
 
@@ -32,7 +33,7 @@ defmodule TimeValueTest do
              with_annuity: 1000,
              with_interest_rate: 0.05,
              with_periods: 5,
-             with_payment_at: :beginning
+             with_payment_at_end?: false
            ) == {:ok, 5_801.91}
   end
 
@@ -60,7 +61,8 @@ defmodule TimeValueTest do
     assert TimeValue.present_value(
              with_annuity: 100,
              with_interest_rate: 0.025,
-             with_periods: 10
+             with_periods: 10,
+             with_payment_at_end?: true
            ) == {:ok, 875.21}
   end
 
@@ -68,7 +70,8 @@ defmodule TimeValueTest do
     assert TimeValue.present_value(
              with_annuity: 1000,
              with_interest_rate: 0.05,
-             with_periods: 5
+             with_periods: 5,
+             with_payment_at_end?: true
            ) == {:ok, 4_329.48}
   end
 
